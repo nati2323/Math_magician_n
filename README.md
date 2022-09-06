@@ -1,6 +1,6 @@
   ![](https://img.shields.io/badge/Microverse-blueviolet) 
 
-# Math Magians
+# Math Magicians
 Math magicians is a website for all fans of mathematics. It is a Single Page App (SPA) that allows users to Make simple calculation.
 
 ## Live Demo 
@@ -9,16 +9,15 @@ Math magicians is a website for all fans of mathematics. It is a Single Page App
 
 - HTML
 - Basic CSS 
-- JavaScript
-- ES6 syntax
-- Webpack
+- **JavaScript** and  **ES6 syntax**
+- **Webpack**
 - Linters (Lighthouse, Webhint, Stylelint, Eslint)
 - Git/GitHub work-flow
 - React
  
 ### Installation 
-- git clone `git clone https://github.com/nati2323/Math_magician_n.git` .
-- Type `Math_magician_n`.
+- git clone `git clone https://github.com/nati2323/Math_magician.git` .
+- Type `cd 1-math-magicians-setup`.
 
 #### Install dependencies
 ```
