@@ -4,6 +4,15 @@ function isNumber(item) {
   return !!item.match(/[0-9]+/);
 }
 
+/**
+ * Given a button name and a calculator data object, return an updated
+ * calculator data object.
+ *
+ * Calculator data object contains:
+ *   total:s      the running total
+ *   next:String       the next number to be operated on with the total
+ *   operation:String  +, -, etc.
+ */
 export default function calculate(obj, buttonName) {
   if (buttonName === 'AC') {
     return {
@@ -58,11 +67,19 @@ export default function calculate(obj, buttonName) {
 
   if (buttonName === '=') {
     if (obj.next && obj.operation) {
-      return {
-        total: operate(obj.total, obj.next, obj.operation),
-        next: null,
-        operation: null,
-      };
+      try{
+        return {
+          total: operate(obj.total, obj.next, obj.operation),
+          next: null,
+          operation: null,
+        };
+      }catch(err){
+        return {
+          total: "Can't make modulo of 0!",
+          next: null,
+          operation: null,
+        };
+      }
     }
     // '=' with no operation, nothing to do
     return {};
@@ -96,12 +113,20 @@ export default function calculate(obj, buttonName) {
     if (obj.total && !obj.next) {
       return { ...obj, operation: buttonName };
     }
-
-    return {
-      total: operate(obj.total, obj.next, obj.operation),
-      next: null,
-      operation: buttonName,
-    };
+    try {
+      return {
+        total: operate(obj.total, obj.next, obj.operation),
+        next: null,
+        operation: buttonName,
+      };
+    }catch(err){
+      return {
+        total: "Can't make modulo of 0!",
+        next: null,
+        operation: buttonName,
+      };
+    }
+    
   }
 
   // no operation yet, but the user typed one

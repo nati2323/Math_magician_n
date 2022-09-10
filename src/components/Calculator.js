@@ -1,17 +1,38 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './style.css';
 import { ResultIcone } from './resultIcone';
 import { LigneOfButton } from './ligneOfButton';
 import calculate from '../logic/calculate';
-class CalculatorDesign extends React.Component {
-  constructor(props){
-    super(props)
-    this.state = {};
-    this.handleClick = this.handleClick.bind(this);
-    this.prev = null;
+const CalculatorDesign = () => {
+  const displayResult = () => {
+    
+      if(Object.keys(dataObject).length ===0){
+        return 0;
+      }
+      if (dataObject.total){
+        if(!dataObject.operation){
+          return dataObject.total;
+        }
+        if(!dataObject.next){
+          if(!prev){
+            return dataObject.operation;
+          }
+          return dataObject.total;
+        }
+        return dataObject.next;
+      }
+      if(dataObject.operation){
+        return dataObject.operation;
+      }
+      if(dataObject.next){
+        return dataObject.next;
+      }
+      return 0;
+      
   }
-  handleClick (e){
-    console.log('clicked...')
+  const [dataObject, setDataObject] = useState({});
+  const [prev, setPrev] = useState(null);
+  const handleClick =  (e) => {
     const target = e.target;
     const child = target.children;
     let targetElem;
@@ -21,70 +42,19 @@ class CalculatorDesign extends React.Component {
       targetElem = target;
     }
     const buttonName = targetElem.textContent;
-    console.log(buttonName);
-    this.setState(dataObject =>{
-      const newState = calculate(dataObject,buttonName);
-      return newState;
-    });
+    setDataObject(calculate(dataObject,buttonName));
+    setPrev(dataObject.next);
   }
-  
-  render(){
-    let res;
-    if(Object.keys(this.state).length ===0){
-      res = 0;
-    }else{
-      if (this.state.total){
-        if(!this.state.operation){
-          res = this.state.total;
-        }else{
-          if(!this.state.next){
-            if(!this.prev){
-              res = this.state.operation;
-            }else{
-              res = this.state.total;
-            }
-          }else{
-            res = this.state.next;
-          }
 
-        }
-      }else {
-        if(this.state.operation){
-          res = this.state.operation;
-        }else {
-          if(this.state.next){
-            res = this.state.next;
-          }else{
-            res = 0;
-          }
-        }
-      }
-    }
-    this.prev = this.state.next;
-    /*let result; 
-    if(Object.keys(this.state).length === 0){
-      result = 0;
-    }else {
-      if (this.state.total){
-        result = this.state.total;
-      }else {
-        if(this.state.next){
-          result = this.state.next;
-        }else {
-          result = '';
-        }
-      }
-    }*/
     return (
       <div className = "calculator-container">
-        <ResultIcone total = {res}/>
-        <LigneOfButton textBtns = {['AC', '+/-', '%','÷']} order = {2} handler = {this.handleClick}/>
-        <LigneOfButton textBtns = {['7', '8', '9','x']} order = {3} handler = {this.handleClick}/> 
-        <LigneOfButton textBtns = {['4', '5', '6','-']} order = {4} handler = {this.handleClick}/>
-        <LigneOfButton textBtns = {['1', '2', '3','+']} order = {5} handler = {this.handleClick}/>
-        <LigneOfButton textBtns = {['0', '.','=']} order = {6} handler = {this.handleClick}/>
+        <ResultIcone total = {displayResult()}/>
+        <LigneOfButton textBtns = {['AC', '+/-', '%','÷']} order ={2} handler = {handleClick}/>
+        <LigneOfButton textBtns = {['7', '8', '9','x']} order = {3} handler = {handleClick}/> 
+        <LigneOfButton textBtns = {['4', '5', '6','-']} order = {4} handler = {handleClick}/>
+        <LigneOfButton textBtns = {['1', '2', '3','+']} order = {5} handler = {handleClick}/>
+        <LigneOfButton textBtns = {['0', '.','=']} order = {6} handler = {handleClick}/>
       </div>
     );
-  }
 }
-export { ResultIcone, CalculatorDesign };
+export {CalculatorDesign };
