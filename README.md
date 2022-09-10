@@ -9,7 +9,7 @@ Math magicians is a website for all fans of mathematics. It is a Single Page App
 
 - HTML
 - Basic CSS 
-- JavaScript 
+- JavaScript
 - ES6 syntax
 - Webpack
 - Linters (Lighthouse, Webhint, Stylelint, Eslint)
@@ -17,8 +17,8 @@ Math magicians is a website for all fans of mathematics. It is a Single Page App
 - React
  
 ### Installation 
-- git clone `git clone https://github.com/nati2323/2-math-magicians-components.git` .
-- Type `cd 2-math-magicians-components`.
+- git clone `git clone https://github.com/nati2323/1-math-magicians-setup.git` .
+- Type `cd 1-math-magicians-setup`.
 
 #### Install dependencies
 ```

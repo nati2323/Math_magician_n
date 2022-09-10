@@ -1,57 +1,88 @@
 import React from 'react';
 import './style.css';
-class ResultIcone extends React.Component {
-    constructor(props){
-        super(props)
-    }
-    render(){
-        return <div className = "calculator-result"> <span> 0</span> </div>
-    }
-}
-class LigneOfButton extends React.Component {
-  constructor(props){
-    super(props)
-    this.props = props;
-  }
-  render() {
-    const btnsText = this.props.textBtns;
-    let content;
-    const order = this.props.order;
-    if(btnsText.length === 4){
-      content = (
-        <div className = 'command-line' style = {{gridRow: `${order} / span 1`}}>
-          <div className ="simple-btn"><span>{btnsText[0]}</span></div>
-          <div className ="simple-btn"><span>{btnsText[1]}</span></div>
-          <div className ="simple-btn"><span>{btnsText[2]}</span></div>
-          <div className ="op-btn"><span>{btnsText[3]}</span></div>
-        </div>
-        );
-    }
-    if(btnsText.length === 3){
-      content = (
-        <div className = 'command-line' style = {{gridRow: `${order} / span 1`}}>
-          <div className ="merge-btn"><span>{btnsText[0]}</span></div>
-          <div className ="simple-btn"><span>{btnsText[1]}</span></div>
-          <div className ="op-btn"><span>{btnsText[2]}</span></div>
-        </div>
-        );
-    }
-    return content;
-  }
-}
+import { ResultIcone } from './resultIcone';
+import { LigneOfButton } from './ligneOfButton';
+import calculate from '../logic/calculate';
 class CalculatorDesign extends React.Component {
   constructor(props){
     super(props)
+    this.state = {};
+    this.handleClick = this.handleClick.bind(this);
+    this.prev = null;
   }
+  handleClick (e){
+    console.log('clicked...')
+    const target = e.target;
+    const child = target.children;
+    let targetElem;
+    if (child.length > 0){
+      targetElem = child[0];
+    }else {
+      targetElem = target;
+    }
+    const buttonName = targetElem.textContent;
+    console.log(buttonName);
+    this.setState(dataObject =>{
+      const newState = calculate(dataObject,buttonName);
+      return newState;
+    });
+  }
+  
   render(){
+    let res;
+    if(Object.keys(this.state).length ===0){
+      res = 0;
+    }else{
+      if (this.state.total){
+        if(!this.state.operation){
+          res = this.state.total;
+        }else{
+          if(!this.state.next){
+            if(!this.prev){
+              res = this.state.operation;
+            }else{
+              res = this.state.total;
+            }
+          }else{
+            res = this.state.next;
+          }
+
+        }
+      }else {
+        if(this.state.operation){
+          res = this.state.operation;
+        }else {
+          if(this.state.next){
+            res = this.state.next;
+          }else{
+            res = 0;
+          }
+        }
+      }
+    }
+    this.prev = this.state.next;
+    /*let result; 
+    if(Object.keys(this.state).length === 0){
+      result = 0;
+    }else {
+      if (this.state.total){
+        result = this.state.total;
+      }else {
+        if(this.state.next){
+          result = this.state.next;
+        }else {
+          result = '';
+        }
+      }
+    }*/
     return (
       <div className = "calculator-container">
-        <ResultIcone/>
-        <LigneOfButton textBtns = {['AC', '+/-', '%','÷']} order = {2} />
-        <LigneOfButton textBtns = {['7', '8', '9','x']} order = {3} />
-        <LigneOfButton textBtns = {['4', '5', '6','-']} order = {4} />
-        <LigneOfButton textBtns = {['1', '2', '3','+']} order = {5} />
-        <LigneOfButton textBtns = {['0', '.','=']} order = {6} />
+        <ResultIcone total = {res}/>
+        <LigneOfButton textBtns = {['AC', '+/-', '%','÷']} order = {2} handler = {this.handleClick}/>
+        <LigneOfButton textBtns = {['7', '8', '9','x']} order = {3} handler = {this.handleClick}/> 
+        <LigneOfButton textBtns = {['4', '5', '6','-']} order = {4} handler = {this.handleClick}/>
+        <LigneOfButton textBtns = {['1', '2', '3','+']} order = {5} handler = {this.handleClick}/>
+        <LigneOfButton textBtns = {['0', '.','=']} order = {6} handler = {this.handleClick}/>
       </div>
     );
   }
