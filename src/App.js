@@ -1,10 +1,14 @@
+import React from 'react';
 import { CalculatorDesign } from "./components/Calculator";
-function App() {
+class App extends React.Component {
+  render() {
   return (
-    <div className="App">
+    <div>
       <CalculatorDesign/>
     </div>
   );
+  }
 }
 
 export default App;
+
