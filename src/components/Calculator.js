@@ -61,20 +61,7 @@ class CalculatorDesign extends React.Component {
       }
     }
     this.prev = this.state.next;
-    /*let result; 
-    if(Object.keys(this.state).length === 0){
-      result = 0;
-    }else {
-      if (this.state.total){
-        result = this.state.total;
-      }else {
-        if(this.state.next){
-          result = this.state.next;
-        }else {
-          result = '';
-        }
-      }
-    }*/
+  
     return (
       <div className = "calculator-container">
         <ResultIcone total = {res}/>
