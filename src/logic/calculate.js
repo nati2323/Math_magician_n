@@ -67,13 +67,13 @@ export default function calculate(obj, buttonName) {
 
   if (buttonName === '=') {
     if (obj.next && obj.operation) {
-      try{
+      try {
         return {
           total: operate(obj.total, obj.next, obj.operation),
           next: null,
           operation: null,
         };
-      }catch(err){
+      } catch (err) {
         return {
           total: "Can't make modulo of 0!",
           next: null,
@@ -119,15 +119,15 @@ export default function calculate(obj, buttonName) {
         next: null,
         operation: buttonName,
       };
-    }catch(err){
+    } catch (err) {
       return {
         total: "Can't make modulo of 0!",
         next: null,
         operation: buttonName,
       };
-    }
-    
+    }   
   }
+  
 
   // no operation yet, but the user typed one
 
