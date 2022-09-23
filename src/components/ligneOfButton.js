@@ -1,3 +1,4 @@
+/* eslint-disable */ 
 export const LigneOfButton = (props) => {
   const {textBtns, order, handler } = props;
   let content;
