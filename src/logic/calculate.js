@@ -125,9 +125,8 @@ export default function calculate(obj, buttonName) {
         next: null,
         operation: buttonName,
       };
-    }   
+    }
   }
-  
 
   // no operation yet, but the user typed one
 
