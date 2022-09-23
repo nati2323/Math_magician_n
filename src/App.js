@@ -14,7 +14,7 @@ function App() {
     const target = e.target;
     const lists = Array.from(document.querySelectorAll('li'));
     lists.forEach(li => {(
-      const anchor = li.querySelector('a');
+      let anchor = li.querySelector('a');
       anchor.style.color = 'rgb(133, 134, 147)';
     });
     target.style.color = '#aaa';
