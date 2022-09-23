@@ -13,12 +13,12 @@ function App() {
   const pageHandler = (e) => {
     const target = e.target;
     const lists = Array.from(document.querySelectorAll('li'));
-    lists.forEach(li => {(
-     const anchor = li.querySelector('a');
+    lists.forEach( li => {
+      const anchor = li.querySelector('a');
       anchor.style.color = 'rgb(133, 134, 147)';
-    });
+    })
     target.style.color = '#aaa';
-  };
+  }
   return (
     <Router>
       <div className="App">
